@@ -1,6 +1,5 @@
-
 #!/usr/bin/env bash
-./clean.sh
+
 # Re-exec with bash when invoked as "sh build.sh".
 if [ -z "${BASH_VERSION:-}" ]; then
   exec bash "$0" "$@"
