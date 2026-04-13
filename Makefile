@@ -6,7 +6,7 @@ clean:
 	rm -rf dist || true
 	mkdir dist
 patch: clean
-	python tools/extractfv.py ./images/abl.img -o ./dist
+	python3 tools/extractfv.py ./images/abl.img -o ./dist
 	mv ./dist/LinuxLoader.efi ./dist/ABL_original.efi
 	gcc -o tools/patch_abl tools/patch_abl.c
 	./tools/patch_abl ./dist/ABL_original.efi ./dist/ABL.efi > ./dist/patch_log.txt
@@ -69,7 +69,7 @@ test_exploit:
 	@echo "This script is used to test the ABL exploit. Please make sure you tested before ota."
 	@echo Please enter the Builtin Fastboot in the project. And put abl.img in the images folder. Press Enter to continue.
 	@bash -c read -n 1 -s
-	@python tools/extractfv.py ./images/abl.img ./ABL_original.efi
+	@python3 tools/extractfv.py ./images/abl.img ./ABL_original.efi
 	@fastboot boot ./ABL_original.efi
 	@echo 'If the exploit existed in the new abl image, the device will show two lines of "Press Volume Down key to enter Fastboot mode, waiting for 5 seconds into Normal mode..."'
 	@echo 'If the exploit does not exist in the new abl image, the device will show red state screen'
